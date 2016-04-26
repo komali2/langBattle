@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf dist",
+    "webpack-prod": "NODE_ENV=production webpack --progress -p",
+    "webpack-dev": "NODE_ENV=development webpack --progress",
+    "server-prod": "node ./index.js",
+    "server-dev": "nodemon ./index.js",
+    "start": "npm run clean && npm run webpack-prod && npm run server-prod",
+    "dev": "npm run clean && npm run webpack-dev && npm run server-dev"
   },
   "repository": {
     "type": "git",
