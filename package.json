@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/server.js",
-    "test": "karma start karma.confg.js"
+    "test": "karma start karma.confg.js",
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +19,7 @@
   "homepage": "https://github.com/komali2/langBattle#readme",
   "dependencies": {
     "bower": "^1.7.9",
+    "express": "^4.13.4",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^1.0.1",
