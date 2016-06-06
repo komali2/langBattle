@@ -1,0 +1,10 @@
+{
+  "name": "langbattle",
+  "description": "multiplayer language flash cards",
+  "dependencies": {
+    "angular": "^1.5.6",
+    "angular-route": "^1.5.6",
+    "angular-loader": "^1.5.6",
+    "angular-mocks": "^1.5.6"
+  }
+}
