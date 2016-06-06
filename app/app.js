@@ -10,6 +10,6 @@ app.config(function($routeProvider){
       controllerAs: 'home'
     })
     .otherwise({
-      redirectTo: '/inbox'
+      redirectTo: '/home'
     });
 });
