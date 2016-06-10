@@ -5,6 +5,8 @@ require('./middleware.js')(app, express);
 
 var port = process.env.PORT || 8080;
 
-app.listen(port, () => {
-  console.log('Server up on port ', port);
+var server = app.listen(port);
+var io = require('socket.io').listen(server);
+io.on('connect', function(thing){
+  console.log('a user has connected');
 });
