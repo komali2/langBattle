@@ -10,3 +10,7 @@ var io = require('socket.io').listen(server);
 io.on('connect', function(thing){
   console.log('a user has connected');
 });
+
+io.on('chat', function(msg){
+  console.log('message: ', msg);
+});

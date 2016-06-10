@@ -1,5 +1,7 @@
 var app = angular.module('langBattle', [
-  'ngRoute'
+  'ngRoute',
+  
+
 ]);
 
 app.config(function($routeProvider){
