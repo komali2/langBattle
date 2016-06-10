@@ -7,10 +7,9 @@ var port = process.env.PORT || 8080;
 
 var server = app.listen(port);
 var io = require('socket.io').listen(server);
-io.on('connect', function(thing){
+io.on('connect', function(socket){
   console.log('a user has connected');
-});
-
-io.on('chat', function(msg){
-  console.log('message: ', msg);
+  socket.on('chat', function(msg){
+    console.log('message: ', msg);
+  });
 });
