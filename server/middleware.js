@@ -6,5 +6,5 @@ module.exports = function(app, express){
   app.use(express.static(path.join(__dirname, '../app')));
   app.use('/arena', arenaRouter);
 
-  require('./routes/arena/arenaRouter.js');
+  require('./routes/arena/arenaRouter.js')(arenaRouter);
 };
