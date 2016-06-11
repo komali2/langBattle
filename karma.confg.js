@@ -9,7 +9,8 @@ module.exports = function(config){
       'bower_components/angular-mocks/angular-mocks.js',
       'app.js',
       'factories/**/*.js',
-      'views/**/*.js'
+      'views/**/*.js',
+      'http://localhost:8080/socket.io/socket.io.js'
     ],
 
     autoWatch: true,
