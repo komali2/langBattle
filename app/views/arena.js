@@ -18,10 +18,10 @@ angular.module('langBattle')
       $scope.showCards = function(){
         $scope.getCards($scope.cardNum)
           .then((res)=>{
-            $scope.currCard = res;
+            $scope.currCard = res.data;
             $scope.cardNum += 1;
           }, (res)=>{
-            console.log('error in showCard', res);
+            console.dir('error in showCard', res);
           });
       }
     }]);
