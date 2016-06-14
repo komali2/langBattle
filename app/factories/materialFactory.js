@@ -3,6 +3,7 @@ angular.module('langBattle')
     var api = {};
 
     api.openModal = function(id){
+      console.log('function ran');
       $(id).openModal();
     }
     api.closeModal = function(id){
