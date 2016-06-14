@@ -21,7 +21,7 @@ angular.module('langBattle')
             $scope.currCard = res.data;
             $scope.cardNum += 1;
           }, (res)=>{
-            console.dir('error in showCard', res);
+            throw new Error('Server error in ShowCards: ' + res.data + " " + res.statusText);
           });
       }
     }]);
