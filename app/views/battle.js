@@ -18,6 +18,10 @@ angular.module('langBattle')
       });
     }
 
+    $scope.joinBattle = function(){
+      $scope.openModal();
+    }
+
     $scope.showCards = function(){
       $scope.getCards($scope.cardNum)
         .then((res)=>{
