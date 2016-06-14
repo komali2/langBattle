@@ -1,10 +1,12 @@
 angular.module('langBattle')
   .controller('battleController',
-  ['$scope', 'socket', '$http',
-  function($scope, socket, $http){
-    $scope.closeModal = function(){
-       $('#modal1').closeModal();
+  ['$scope', 'socket', '$http', 'materialFactory',
+  function($scope, socket, $http, materialFactory){
+
+    $scope.exitBattle = function(){
+      materialFactory.closeModal('#battleView');
     }
+
     $scope.cardNum = 0;
     $scope.submitChat = function(){
       socket.emit('chat', 'test');
