@@ -24,4 +24,7 @@ angular.module('langBattle')
             throw new Error('Server error in ShowCards: ' + res.data + " " + res.statusText);
           });
       }
+      $scope.showModal = function(){
+        $('#modal1').openModal();
+      }
     }]);

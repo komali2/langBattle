@@ -6,9 +6,10 @@
 <body ng-app='langBattle'>
 
   <div class='container' ng-view></div>
-  
+
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
   <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
@@ -16,6 +17,14 @@
   <script src='/factories/socket.js'></script>
   <script src='/views/home.js'></script>
   <script src='/views/arena.js'></script>
+  <script>
+    $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+      $('.modal-trigger').leanModal({
+        dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      });
+    });
+  </script>
 
 </body>
 </html>
