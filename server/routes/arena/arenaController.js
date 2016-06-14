@@ -1,3 +1,4 @@
+ioController = require('./ioController.js');
 var cardList = [
   ['hello', 'nihao'],
   ['dog', 'gou'],
@@ -14,5 +15,10 @@ module.exports = {
     else{
       res.status(500).send("Couldn't find card for query, " + JSON.stringify(req.query));
     }
+  },
+
+  ioConnect: function (socket){
+    socket.on('joinBattle', ioController.handleNewPlayer);
+    console.log('yea he joined twice', socket.id);
   }
 }
