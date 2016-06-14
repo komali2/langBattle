@@ -7,7 +7,7 @@ var port = process.env.PORT || 8080;
 server.listen(8080);
 
 
-require('./middleware.js')(app, express);
+require('./middleware.js')(app, express, io);
 
 io.on('connect', function(socket){
   console.log('a user has connected');

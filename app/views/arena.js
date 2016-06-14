@@ -5,5 +5,6 @@ angular.module('langBattle')
 
       $scope.joinBattle = function(){
         materialFactory.openModal('#battleView');
+        socket.emit('joinBattle');
       }
     }]);

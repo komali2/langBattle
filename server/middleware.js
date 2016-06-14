@@ -1,10 +1,10 @@
 var path = require('path');
 
-module.exports = function(app, express){
+module.exports = function(app, express, io){
   var arenaRouter = express.Router();
 
   app.use(express.static(path.join(__dirname, '../app')));
   app.use('/arena', arenaRouter);
 
-  require('./routes/arena/arenaRouter.js')(arenaRouter);
+  require('./routes/arena/arenaRouter.js')(arenaRouter, io);
 };
