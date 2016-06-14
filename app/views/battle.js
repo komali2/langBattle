@@ -5,6 +5,28 @@ angular.module('langBattle')
     $scope.closeModal = function(){
        $('#modal1').closeModal();
     }
+    $scope.cardNum = 0;
+    $scope.submitChat = function(){
+      socket.emit('chat', 'test');
+    }
+
+    $scope.getCards = function(num){
+      return $http.get('/arena/cards', {
+        params: {
+          num: num
+        }
+      });
+    }
+
+    $scope.showCards = function(){
+      $scope.getCards($scope.cardNum)
+        .then((res)=>{
+          $scope.currCard = res.data;
+          $scope.cardNum += 1;
+        }, (res)=>{
+          throw new Error('Server error in ShowCards: ' + res.data + " " + res.statusText);
+        });
+    }
 
 
 

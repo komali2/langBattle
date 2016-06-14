@@ -6,17 +6,17 @@ This is the home view.
   <input type='text' ng-model='chat'>
   <button class='waves-effect waves-light btn' ng-click='submitChat()'>Click</button>
 
-  <button class='waves-effect waves-light btn' ng-click='showCards()'>Show Card</button>
   <button class="waves-effect waves-light btn modal-trigger" ng-click='showModal()'>Show Modal Angular</button>
 
-  {{currCard}}
+
 
   <div id="modal1" class="modal" ng-controller='battleController'>
      <div class="modal-content">
        <h4>Modal Header</h4>
-       <p>A bunch of text</p>
+       <p>{{currCard}}</p>
      </div>
      <div class="modal-footer">
+       <button class='waves-effect waves-light btn' ng-click='showCards()'>Show Card</button>
        <button ng-click='closeModal()'>Close</button>
      </div>
    </div>
