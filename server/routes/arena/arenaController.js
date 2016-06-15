@@ -9,6 +9,7 @@ var cardList = [
 function User(id){
   this.id = id;
   this.cardIndex = 0;
+  this.inBattle = false;
 }
 
 module.exports = {
@@ -31,17 +32,31 @@ module.exports = {
         if(err){
           console.log(err);
         }
-        console.log(socket.id + ' is a member of these rooms: ' + JSON.stringify(socket.rooms));
         userStorage[socket.id] = new User(socket.id);
+        userStorage[socket.id].inBattle = true;
       });
     });
 
     socket.on('getNewCard', ()=>{
-      console.log('got request for new card');
-      console.log(socket.id);
-      socket
-        .emit('newCard', {card: cardList[userStorage[socket.id].cardIndex]});
-      userStorage[socket.id].cardIndex++;
+      if(userStorage[socket.id].inBattle){
+        if(userStorage[socket.id].cardIndex < cardList.length){
+          socket
+            .emit('newCard', {card: cardList[userStorage[socket.id].cardIndex]});
+          userStorage[socket.id].cardIndex++;
+        }
+        else if(userStorage[socket.id].cardIndex >= cardList.length){
+          socket.emit('youWin', {'youWon': 'youWon'});
+          socket.broadcast.to('battleRoom').emit('youLost', {'youLost': 'youLost'});
+        }
+      }
+      else{
+
+      }
+
+    });
+
+    socket.on('youLost', ()=>{
+
     });
 
   },

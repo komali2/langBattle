@@ -12,37 +12,31 @@ angular.module('langBattle')
       socket.emit('chat', 'test');
     }
 
-    $scope.getCards = function(num){
-      return $http.get('/arena/cards', {
-        params: {
-          num: num
-        }
-      });
-    }
-
     $scope.joinBattle = function(){
       $scope.openModal();
     }
 
-    $scope.showCards = function(){
-      $scope.getCards($scope.cardNum)
-        .then((res)=>{
-          $scope.currCard = res.data;
-          $scope.cardNum += 1;
-        }, (res)=>{
-          throw new Error('Server error in ShowCards: ' + res.data + " " + res.statusText);
-        });
-    }
+
     $scope.getSocketCard = function(){
       socket.emit('getNewCard', '', ()=>{
         console.log('emmited get new card');
       });
 
     }
+
+
     socket.on('newCard', (data)=>{
       console.log('got new card');
       $scope.currCard = data;
     });
+
+    socket.on('youWin', (data)=>{
+      console.log('you won!!!');
+    });
+
+    socket.on('youLose', (data)=>{
+      console.log('you lost :( ');
+    })
 
 
 
