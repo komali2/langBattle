@@ -41,7 +41,9 @@ module.exports = {
       console.log(socket.id);
       socket
         .emit('newCard', {card: cardList[userStorage[socket.id].cardIndex]});
-    })
+      userStorage[socket.id].cardIndex++;
+    });
+
   },
 
 }
