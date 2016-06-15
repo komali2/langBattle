@@ -19,25 +19,25 @@ This is the home view.
       ng-hide='!battleStarted'
       class='waves-effect waves-light btn'
       ng-click='submitCard(currCard.english, currCard.choiceArray[0])'>
-      Start Battle!
+      {{currCard.choiceArray[0]}}
     </button>
     <button
      ng-hide='!battleStarted'
      class='waves-effect waves-light btn'
      ng-click='submitCard(currCard.english, currCard.choiceArray[1])'>
-     Start Battle!
+     {{currCard.choiceArray[1]}}
    </button>
    <button
     ng-hide='!battleStarted'
     class='waves-effect waves-light btn'
     ng-click='submitCard(currCard.english, currCard.choiceArray[2])'>
-    Start Battle!
+    {{currCard.choiceArray[2]}}
   </button>
   <button
    ng-hide='!battleStarted'
    class='waves-effect waves-light btn'
    ng-click='submitCard(currCard.english, currCard.choiceArray[3])'>
-   Start Battle!
+   {{currCard.choiceArray[3]}}
  </button>
      <div class="modal-footer">
 
