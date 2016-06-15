@@ -41,7 +41,6 @@ module.exports = {
       for(var ele in userStorage){
         var stored = userStorage[ele];
         if(!stored.inBattle && stored.id !== user.id){
-          console.log('loop ele is', stored, 'user is', user);
           stored.inBattle = true;
           user.inBattle = true;
           user.roomNumber = stored.roomNumber;
@@ -51,7 +50,6 @@ module.exports = {
       }
       //if no open users found, you are first. create new room
       if(!user.inBattle){
-        console.log('we entered inBattle check', user);
         user.roomNumber = openRoom;
       }
 
@@ -75,8 +73,6 @@ module.exports = {
         else if(user.cardIndex >= cardList.length){
           var battleRoom = 'battleRoom' + user.roomNumber;
           socket.emit('youWin', {'youWon': 'youWon'});
-          console.log(userStorage);
-          console.log(openRoom);
           socket.broadcast.to(battleRoom).emit('youLose', {'youLost': 'youLost'});
         }
       }
