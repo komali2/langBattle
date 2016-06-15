@@ -63,19 +63,27 @@ module.exports = {
       });
     });
 
-    socket.on('getNewCard', ()=>{
+    socket.on('getNewCard', (data)=>{
       var user = userStorage[socket.id];
       if(user.inBattle){
-        if(user.cardIndex < cardController.getSize()){
-          socket
-            .emit('newCard', cardController.getFlashCard(user.cardIndex));
-          user.cardIndex++;
+        //if correct
+        if(checkCorrect(data.english, data.chinese)){
+          if(user.cardIndex < cardController.getSize()){
+            socket
+              .emit('newCard', cardController.getFlashCard(user.cardIndex));
+            user.cardIndex++;
+          }
+          else if(user.cardIndex >= cardController.getSize()){
+            var battleRoom = 'battleRoom' + user.roomNumber;
+            socket.emit('youWin', {'youWon': 'youWon'});
+            socket.broadcast.to(battleRoom).emit('youLose', {'youLost': 'youLost'});
+          }
         }
-        else if(user.cardIndex >= cardController.getSize()){
-          var battleRoom = 'battleRoom' + user.roomNumber;
-          socket.emit('youWin', {'youWon': 'youWon'});
-          socket.broadcast.to(battleRoom).emit('youLose', {'youLost': 'youLost'});
+        //if incorrect
+        else{
+          socket.emit('wrongCard', data.chinese);
         }
+
       }
       else{
 
