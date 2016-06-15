@@ -46,7 +46,7 @@ module.exports = {
         }
         else if(userStorage[socket.id].cardIndex >= cardList.length){
           socket.emit('youWin', {'youWon': 'youWon'});
-          socket.broadcast.to('battleRoom').emit('youLost', {'youLost': 'youLost'});
+          socket.broadcast.to('battleRoom').emit('youLose', {'youLost': 'youLost'});
         }
       }
       else{
