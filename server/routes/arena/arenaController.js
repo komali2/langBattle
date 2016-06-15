@@ -1,10 +1,11 @@
 ioController = require('./ioController.js');
+var cardController = require('./cardController.js');
 var cardList = [
   ['hello', 'nihao'],
   ['dog', 'gou'],
   ['goodbye', 'zaijian'],
   ['please', 'qing']
-]
+];
 
 function User(id){
   this.id = id;
@@ -65,12 +66,12 @@ module.exports = {
     socket.on('getNewCard', ()=>{
       var user = userStorage[socket.id];
       if(user.inBattle){
-        if(user.cardIndex < cardList.length){
+        if(user.cardIndex < cardController.getSize()){
           socket
-            .emit('newCard', {card: cardList[user.cardIndex]});
+            .emit('newCard', cardController.getFlashCard(user.cardIndex));
           user.cardIndex++;
         }
-        else if(user.cardIndex >= cardList.length){
+        else if(user.cardIndex >= cardController.getSize()){
           var battleRoom = 'battleRoom' + user.roomNumber;
           socket.emit('youWin', {'youWon': 'youWon'});
           socket.broadcast.to(battleRoom).emit('youLose', {'youLost': 'youLost'});
