@@ -10,7 +10,13 @@ function User(id){
   this.id = id;
   this.cardIndex = 0;
   this.inBattle = false;
+  this.roomNumber = null;
 }
+
+var openRoom = 0;
+var userStorage = {};
+
+
 
 module.exports = {
   getCards: function(req, res){
@@ -25,28 +31,53 @@ module.exports = {
 
   ioConnect: function (socket){
     //socket.on('joinBattle', ioController.handleNewPlayer);
-    var userStorage = {};
     console.log('enter player: ', socket.id);
     socket.on('joinBattle', ()=>{
-      socket.join('battleRoom', (err)=>{
+
+      //create new user
+      userStorage[socket.id] = new User(socket.id);
+      var user = userStorage[socket.id];
+      //find a user without a partner
+      for(var ele in userStorage){
+        var stored = userStorage[ele];
+        if(!stored.inBattle && stored.id !== user.id){
+          console.log('loop ele is', stored, 'user is', user);
+          stored.inBattle = true;
+          user.inBattle = true;
+          user.roomNumber = stored.roomNumber;
+          openRoom++;
+          break;
+        }
+      }
+      //if no open users found, you are first. create new room
+      if(!user.inBattle){
+        console.log('we entered inBattle check', user);
+        user.roomNumber = openRoom;
+      }
+
+      var battleRoom = 'battleRoom' + user.roomNumber;
+      //put user in the socket room
+      socket.join(battleRoom, (err)=>{
         if(err){
           console.log(err);
         }
-        userStorage[socket.id] = new User(socket.id);
-        userStorage[socket.id].inBattle = true;
       });
     });
 
     socket.on('getNewCard', ()=>{
-      if(userStorage[socket.id].inBattle){
-        if(userStorage[socket.id].cardIndex < cardList.length){
+      var user = userStorage[socket.id];
+      if(user.inBattle){
+        if(user.cardIndex < cardList.length){
           socket
-            .emit('newCard', {card: cardList[userStorage[socket.id].cardIndex]});
-          userStorage[socket.id].cardIndex++;
+            .emit('newCard', {card: cardList[user.cardIndex]});
+          user.cardIndex++;
         }
-        else if(userStorage[socket.id].cardIndex >= cardList.length){
+        else if(user.cardIndex >= cardList.length){
+          var battleRoom = 'battleRoom' + user.roomNumber;
           socket.emit('youWin', {'youWon': 'youWon'});
-          socket.broadcast.to('battleRoom').emit('youLose', {'youLost': 'youLost'});
+          console.log(userStorage);
+          console.log(openRoom);
+          socket.broadcast.to(battleRoom).emit('youLose', {'youLost': 'youLost'});
         }
       }
       else{
