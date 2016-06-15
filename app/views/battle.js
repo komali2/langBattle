@@ -14,21 +14,33 @@ angular.module('langBattle')
 
     $scope.joinBattle = function(){
       $scope.openModal();
+      $scope.battleStarted = false;
     }
 
 
-    $scope.getSocketCard = function(){
-      socket.emit('getNewCard', '', ()=>{
-        console.log('emmited get new card');
+    $scope.submitCard = function(){
+      console.log("submitcard called");
+      socket.emit('submitCard', $scope.currCard, ()=>{
+        console.log('emmited submitCard');
       });
-
     }
 
+    $scope.getFirstCard = function(){
+      socket.emit('getFirstCard', {}, ()=>{
+        console.log('emmited getfirstcard');
+      })
+      $scope.battleStarted = true;
+    }
 
     socket.on('newCard', (data)=>{
       console.log('got new card');
       $scope.currCard = data;
     });
+
+    socket.on('wrongCard', (data)=>{
+      console.log('wrong card');
+      $scope.serverMessage = data;
+    })
 
     socket.on('youWin', (data)=>{
       console.log('you won!!!');

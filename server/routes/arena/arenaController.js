@@ -63,11 +63,21 @@ module.exports = {
       });
     });
 
-    socket.on('getNewCard', (data)=>{
+    socket.on('getFirstCard', ()=>{
       var user = userStorage[socket.id];
+
+      if(user.inBattle){
+        socket.emit('newCard', cardController.getFlashCard(user.cardIndex));
+        user.cardIndex++;
+      }
+    });
+
+    socket.on('submitCard', (data)=>{
+      var user = userStorage[socket.id];
+      console.log('heard submitCard');
       if(user.inBattle){
         //if correct
-        if(checkCorrect(data.english, data.chinese)){
+        if(cardController.checkCorrect(data.english, data.chinese)){
           if(user.cardIndex < cardController.getSize()){
             socket
               .emit('newCard', cardController.getFlashCard(user.cardIndex));
