@@ -37,8 +37,11 @@ module.exports = {
     });
 
     socket.on('getNewCard', ()=>{
-      socket.to(socket.id)
+      console.log('got request for new card');
+      console.log(socket.id);
+      socket
         .emit('newCard', {card: cardList[userStorage[socket.id].cardIndex]});
     })
-  }
+  },
+
 }

@@ -33,7 +33,16 @@ angular.module('langBattle')
           throw new Error('Server error in ShowCards: ' + res.data + " " + res.statusText);
         });
     }
+    $scope.getSocketCard = function(){
+      socket.emit('getNewCard', '', ()=>{
+        console.log('emmited get new card');
+      });
 
+    }
+    socket.on('newCard', (data)=>{
+      console.log('got new card');
+      $scope.currCard = data;
+    });
 
 
 

@@ -16,7 +16,16 @@ This is the home view.
        <p>{{currCard}}</p>
      </div>
      <div class="modal-footer">
-       <button class='waves-effect waves-light btn' ng-click='showCards()'>Show Card</button>
+       <button
+        class='waves-effect waves-light btn'
+        ng-click='showCards()'>
+        Show Card
+      </button>
+       <button
+        class='waves-effect waves-light btn'
+        ng-click='getSocketCard()'>
+        Get Socket card
+      </button>
        <button ng-click='exitBattle()'>Close</button>
      </div>
    </div>
