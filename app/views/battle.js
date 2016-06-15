@@ -19,21 +19,17 @@ angular.module('langBattle')
 
 
     $scope.submitCard = function(english, chinese){
-      console.log("submitcard called, english is", english);
       socket.emit('submitCard', {english: english, chinese: chinese}, ()=>{
-        console.log('emmited submitCard');
       });
     }
 
     $scope.getFirstCard = function(){
       socket.emit('getFirstCard', {}, ()=>{
-        console.log('emmited getfirstcard');
       })
       $scope.battleStarted = true;
     }
 
     socket.on('newCard', (data)=>{
-      console.log('got new card');
       $scope.currCard = data;
     });
 
