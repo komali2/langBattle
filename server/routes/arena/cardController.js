@@ -9,6 +9,7 @@ module.exports = {
   },
   checkCorrect: function(english, chinese){
     var check = false;
+    console.log('checking if ', english, chinese);
     for(var i = 0; i < cardStorage.length; i++){
       if(cardStorage[i].english === english && cardStorage[i].chinese === chinese){
         check = true;

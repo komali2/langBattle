@@ -74,7 +74,7 @@ module.exports = {
 
     socket.on('submitCard', (data)=>{
       var user = userStorage[socket.id];
-      console.log('heard submitCard');
+      console.log('heard submitCard', data);
       if(user.inBattle){
         //if correct
         if(cardController.checkCorrect(data.english, data.chinese)){

@@ -19,8 +19,8 @@ angular.module('langBattle')
 
 
     $scope.submitCard = function(english, chinese){
-      console.log("submitcard called");
-      socket.emit('submitCard', {enlish: english, chinese: chinese}, ()=>{
+      console.log("submitcard called, english is", english);
+      socket.emit('submitCard', {english: english, chinese: chinese}, ()=>{
         console.log('emmited submitCard');
       });
     }
