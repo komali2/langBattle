@@ -26,7 +26,6 @@ module.exports = {
           console.log(err);
         }
         console.log(socket.id + ' is a member of these rooms: ' + JSON.stringify(socket.rooms));
-
       });
     });
   }
