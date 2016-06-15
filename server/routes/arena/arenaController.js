@@ -6,6 +6,11 @@ var cardList = [
   ['please', 'qing']
 ]
 
+function User(id){
+  this.id = id;
+  this.cardIndex = 0;
+}
+
 module.exports = {
   getCards: function(req, res){
     console.log(req.query.num);
@@ -19,6 +24,7 @@ module.exports = {
 
   ioConnect: function (socket){
     //socket.on('joinBattle', ioController.handleNewPlayer);
+    var userStorage = {};
     console.log('enter player: ', socket.id);
     socket.on('joinBattle', ()=>{
       socket.join('battleRoom', (err)=>{
@@ -26,7 +32,13 @@ module.exports = {
           console.log(err);
         }
         console.log(socket.id + ' is a member of these rooms: ' + JSON.stringify(socket.rooms));
+        userStorage[socket.id] = new User(socket.id);
       });
     });
+
+    socket.on('getNewCard', ()=>{
+      socket.to(socket.id)
+        .emit('newCard', {card: cardList[userStorage[socket.id].cardIndex]});
+    })
   }
 }
