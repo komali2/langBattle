@@ -18,7 +18,16 @@ module.exports = {
   },
 
   ioConnect: function (socket){
-    socket.on('joinBattle', ioController.handleNewPlayer);
-    console.log('yea he joined twice', socket.id);
+    //socket.on('joinBattle', ioController.handleNewPlayer);
+    console.log('enter player: ', socket.id);
+    socket.on('joinBattle', ()=>{
+      socket.join('battleRoom', (err)=>{
+        if(err){
+          console.log(err);
+        }
+        console.log(socket.id + ' is a member of these rooms: ' + JSON.stringify(socket.rooms));
+
+      });
+    });
   }
 }
