@@ -5,6 +5,7 @@ angular.module('langBattle')
     $scope.battleStatus = 'Waiting for Battle...';
     $scope.currCard = {};
     $scope.currCard.english = 'You will see a word here. Select the Chinese translation!';
+    $scope.gameMessage = '';
     $scope.exitBattle = function(){
       materialFactory.closeModal('#battleView');
     }
@@ -37,16 +38,16 @@ angular.module('langBattle')
     });
 
     socket.on('wrongCard', (data)=>{
-      console.log('wrong card');
+      $scope.gameMessage='Wrong Card!';
       $scope.serverMessage = data;
     })
 
     socket.on('youWin', (data)=>{
-      console.log('you won!!!');
+      $scope.gameMessage = 'You Win!';
     });
 
     socket.on('youLose', (data)=>{
-      console.log('you lost :( ');
+      $scope.gameMessage = 'You Lose.';
     })
 
 
