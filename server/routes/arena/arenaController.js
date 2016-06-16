@@ -12,6 +12,7 @@ function User(id){
   this.cardIndex = 0;
   this.inBattle = false;
   this.roomNumber = null;
+  this.hasPartner = false;
 }
 
 var openRoom = 0;
@@ -52,6 +53,7 @@ module.exports = {
       //if no open users found, you are first. create new room
       if(!user.inBattle){
         user.roomNumber = openRoom;
+
       }
 
       var battleRoom = 'battleRoom' + user.roomNumber;
