@@ -6,6 +6,7 @@ angular.module('langBattle')
     $scope.currCard = {};
     $scope.currCard.english = 'You will see a word here. Select the Chinese translation!';
     $scope.gameMessage = '';
+    $scope.hasPartner = false;
     $scope.exitBattle = function(){
       materialFactory.closeModal('#battleView');
     }
