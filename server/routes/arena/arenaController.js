@@ -13,7 +13,10 @@ function User(id){
   this.inBattle = false;
   this.roomNumber = null;
   this.hasPartner = false;
+  this.isReady = false;
 }
+
+var roomStorage = [];
 
 var openRoom = 0;
 var userStorage = {};
@@ -46,6 +49,7 @@ module.exports = {
           stored.inBattle = true;
           user.inBattle = true;
           user.roomNumber = stored.roomNumber;
+          roomStorage[user.roomNumber].push(user);
           openRoom++;
           socket.broadcast.to('battleRoom' + stored.roomNumber).emit('hasPartner', {});
           socket.emit('hasPartner', {});
@@ -55,6 +59,7 @@ module.exports = {
       //if no open users found, you are first. create new room
       if(!user.inBattle){
         user.roomNumber = openRoom;
+        roomStorage[openRoom] = [user];
 
       }
 
@@ -107,6 +112,25 @@ module.exports = {
     socket.on('youLost', ()=>{
 
     });
+
+    socket.on('startBattle', ()=>{
+      var user = userStorage[socket.id];
+      var battleRoom = 'battleRoom' + user.roomNumber;
+      var counter = 0;
+      user.isReady = true;
+      for(var i = 0; i < roomStorage[user.roomNumber].length; i++){
+        if(roomStorage[user.roomNumber][i].isReady){
+          counter++;
+        }
+      }
+      if(counter === 1){
+        socket.broadcast.to(battleRoom).emit('partnerStarted', {});
+      }
+      else if(counter === 2){
+        socket.broadcast.to(battleRoom).emit('okToStart', {});
+        socket.emit('okToStart', {});
+      }
+    })
 
   },
 

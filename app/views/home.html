@@ -18,7 +18,7 @@
           </button>
         </div>
        </div>
-       <div class="progress" ng-hide='hasPartner'><div class="indeterminate"></div></div>
+       <div class="progress" ng-show='waiting'><div class="indeterminate"></div></div>
        <p><h2 class='center-align'>{{currCard.english}}</h2></p>
        <div class='row'>
          <div class='col s1 m2'>&nbsp;</div>
@@ -58,7 +58,7 @@
        id='startBattle'
        ng-hide='battleStarted'
        class='waves-effect waves-light btn disabled'
-       ng-click='getFirstCard()'
+       ng-click='startBattle()'
        ng-disabled='!hasPartner'>
        Start Battle!
      </button>
