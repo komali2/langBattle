@@ -10,30 +10,34 @@
      <div class="modal-content">
        <h4>{{battleStatus}}</h4>
        <p><h5 class='center-align'>{{currCard.english}}</h5></p>
+       <div class='row'>
+         <div class='col s1 m2'>&nbsp;</div>
        <button
         ng-hide='!battleStarted'
-        class='waves-effect waves-light btn'
+        class='waves-effect waves-light btn col s1 m2'
         ng-click='submitCard(currCard.english, currCard.choiceArray[0])'>
         {{currCard.choiceArray[0]}}
       </button>
       <button
        ng-hide='!battleStarted'
-       class='waves-effect waves-light btn'
+       class='waves-effect waves-light btn col s1 m2'
        ng-click='submitCard(currCard.english, currCard.choiceArray[1])'>
        {{currCard.choiceArray[1]}}
      </button>
      <button
       ng-hide='!battleStarted'
-      class='waves-effect waves-light btn'
+      class='waves-effect waves-light btn col s1 m2'
       ng-click='submitCard(currCard.english, currCard.choiceArray[2])'>
       {{currCard.choiceArray[2]}}
     </button>
     <button
      ng-hide='!battleStarted'
-     class='waves-effect waves-light btn'
+     class='waves-effect waves-light btn col s1 m2'
      ng-click='submitCard(currCard.english, currCard.choiceArray[3])'>
      {{currCard.choiceArray[3]}}
    </button>
+   <div class='col s1 m2'>&nbsp;</div>
+  </div>
      </div>
 
      <div class="modal-footer">
