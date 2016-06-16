@@ -4,7 +4,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var port = process.env.PORT || 8080;
 
-server.listen(8080);
+server.listen(port);
 
 
 require('./middleware.js')(app, express, io);
@@ -14,5 +14,5 @@ require('./middleware.js')(app, express, io);
 //   socket.on('chat', function(msg){
 //     console.log('message: ', msg);
 //   });
-// 
+//
 // });
