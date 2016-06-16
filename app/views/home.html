@@ -18,7 +18,7 @@
           </button>
         </div>
        </div>
-       <p><h5 class='center-align'>{{currCard.english}}</h5></p>
+       <p><h2 class='center-align'>{{currCard.english}}</h2></p>
        <div class='row'>
          <div class='col s1 m2'>&nbsp;</div>
        <button
@@ -50,7 +50,9 @@
      </div>
 
      <div class="modal-footer">
-       {{gameMessage}}
+       <div class='col s12 center-align'>
+       <h3>{{gameMessage}}</h2>
+      </div>
       <button
        ng-hide='battleStarted'
        class='waves-effect waves-light btn'
