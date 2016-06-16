@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "karma start karma.confg.js",
+    "postinstall": "bower install",
     "start": "node server/server.js"
   },
   "repository": {
