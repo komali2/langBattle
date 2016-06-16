@@ -1,13 +1,9 @@
-This is the home view.
+<div class='row section' ng-controller='arenaController'>
 
-{{title}}
-
-<div class='row' ng-controller='arenaController'>
-  <input type='text' ng-model='chat'>
-  <button class='waves-effect waves-light btn' ng-click='submitChat()'>Click</button>
-
-  <button class="waves-effect waves-light btn modal-trigger" ng-click='joinBattle()'>Show Modal Angular</button>
-
+  <div class='col s12 m4'> &nbsp;</div>
+  <div class='col s12 m4'>
+    <button class="colwaves-effect waves-light btn modal-trigger " ng-click='joinBattle()'>Find Opponent!</button>
+  </div>
 
 
   <div id="battleView" class="modal" ng-controller='battleController'>
