@@ -49,7 +49,11 @@ angular.module('langBattle')
 
     socket.on('youLose', (data)=>{
       $scope.gameMessage = 'You Lose.';
-    })
+    });
+
+    socket.on('hasPartner', (data)=>{
+      $scope.hasPartner = true;
+    });
 
 
 

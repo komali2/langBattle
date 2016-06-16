@@ -47,6 +47,8 @@ module.exports = {
           user.inBattle = true;
           user.roomNumber = stored.roomNumber;
           openRoom++;
+          socket.broadcast.to('battleRoom' + stored.roomNumber).emit('hasPartner', {});
+          socket.emit('hasPartner', {});
           break;
         }
       }
