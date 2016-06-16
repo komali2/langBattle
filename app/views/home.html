@@ -9,32 +9,33 @@
   <div id="battleView" class="modal" ng-controller='battleController'>
      <div class="modal-content">
        <h4>{{battleStatus}}</h4>
-       <p>{{currCard}}</p>
-     </div>
+       <p><h5 class='center-align'>{{currCard.english}}</h5></p>
+       <button
+        ng-hide='!battleStarted'
+        class='waves-effect waves-light btn'
+        ng-click='submitCard(currCard.english, currCard.choiceArray[0])'>
+        {{currCard.choiceArray[0]}}
+      </button>
+      <button
+       ng-hide='!battleStarted'
+       class='waves-effect waves-light btn'
+       ng-click='submitCard(currCard.english, currCard.choiceArray[1])'>
+       {{currCard.choiceArray[1]}}
+     </button>
      <button
       ng-hide='!battleStarted'
       class='waves-effect waves-light btn'
-      ng-click='submitCard(currCard.english, currCard.choiceArray[0])'>
-      {{currCard.choiceArray[0]}}
+      ng-click='submitCard(currCard.english, currCard.choiceArray[2])'>
+      {{currCard.choiceArray[2]}}
     </button>
     <button
      ng-hide='!battleStarted'
      class='waves-effect waves-light btn'
-     ng-click='submitCard(currCard.english, currCard.choiceArray[1])'>
-     {{currCard.choiceArray[1]}}
+     ng-click='submitCard(currCard.english, currCard.choiceArray[3])'>
+     {{currCard.choiceArray[3]}}
    </button>
-   <button
-    ng-hide='!battleStarted'
-    class='waves-effect waves-light btn'
-    ng-click='submitCard(currCard.english, currCard.choiceArray[2])'>
-    {{currCard.choiceArray[2]}}
-  </button>
-  <button
-   ng-hide='!battleStarted'
-   class='waves-effect waves-light btn'
-   ng-click='submitCard(currCard.english, currCard.choiceArray[3])'>
-   {{currCard.choiceArray[3]}}
- </button>
+     </div>
+
      <div class="modal-footer">
 
        <button

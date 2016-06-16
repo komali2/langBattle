@@ -2,7 +2,9 @@ angular.module('langBattle')
   .controller('battleController',
   ['$scope', 'socket', '$http', 'materialFactory',
   function($scope, socket, $http, materialFactory){
-    $scope.battleStatus = 'Waiting for Battle...'
+    $scope.battleStatus = 'Waiting for Battle...';
+    $scope.currCard = {};
+    $scope.currCard.english = 'You will see a word here. Select the Chinese translation!';
     $scope.exitBattle = function(){
       materialFactory.closeModal('#battleView');
     }
