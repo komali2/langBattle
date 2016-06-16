@@ -52,7 +52,7 @@ angular.module('langBattle')
 
     socket.on('newCard', (data)=>{
       $scope.currCard = data;
-      $scope.serverMessage = '';
+      $scope.gameMessage = '';
     });
 
     socket.on('wrongCard', (data)=>{
