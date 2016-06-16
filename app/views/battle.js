@@ -2,7 +2,7 @@ angular.module('langBattle')
   .controller('battleController',
   ['$scope', 'socket', '$http', 'materialFactory',
   function($scope, socket, $http, materialFactory){
-
+    $scope.battleStatus = 'Waiting for Battle...'
     $scope.exitBattle = function(){
       materialFactory.closeModal('#battleView');
     }
@@ -27,6 +27,7 @@ angular.module('langBattle')
       socket.emit('getFirstCard', {}, ()=>{
       })
       $scope.battleStarted = true;
+      $scope.battleStatus = 'In Battle!'
     }
 
     socket.on('newCard', (data)=>{
