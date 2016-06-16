@@ -55,8 +55,9 @@
        <h3>{{gameMessage}}</h2>
       </div>
       <button
+       id='startBattle'
        ng-hide='battleStarted'
-       class='waves-effect waves-light btn'
+       class='waves-effect waves-light btn disabled'
        ng-click='getFirstCard()'
        ng-disabled='!hasPartner'>
        Start Battle!

@@ -53,6 +53,7 @@ angular.module('langBattle')
 
     socket.on('hasPartner', (data)=>{
       $scope.hasPartner = true;
+      $('#startBattle').removeClass('disabled');
     });
 
 
