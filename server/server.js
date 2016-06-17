@@ -8,11 +8,3 @@ server.listen(port);
 
 
 require('./middleware.js')(app, express, io);
-
-// io.on('connect', function(socket){
-//   console.log('a user has connected', socket.id);
-//   socket.on('chat', function(msg){
-//     console.log('message: ', msg);
-//   });
-//
-// });
