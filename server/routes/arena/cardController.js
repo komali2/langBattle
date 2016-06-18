@@ -35,6 +35,7 @@ module.exports = {
           .push({
             chinese: newArray[key].chinese,
             id: newArray[key].id});
+        shuffle(newArray[key].choiceArray);
       });
       cb(newArray);
     });
@@ -44,4 +45,14 @@ module.exports = {
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length; i; i -= 1) {
+        j = Math.floor(Math.random() * i);
+        x = a[i - 1];
+        a[i - 1] = a[j];
+        a[j] = x;
+    }
 }
