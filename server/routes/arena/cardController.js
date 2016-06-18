@@ -23,7 +23,12 @@ module.exports = {
       newArray.forEach((el, key)=>{
         newArray[key].choiceArray = [];
         for(var i = 0; i < 4; i++){
-          newArray[key].choiceArray.push(newArray[getRandomInt(0, 9)].chinese)
+          var rand = getRandomInt(0, 9);
+          newArray[key]
+            .choiceArray
+            .push({
+              chinese: newArray[rand].chinese,
+              id: newArray[rand.id]});
         }
         newArray[key].choiceArray.push(newArray[key].chinese);
       });
