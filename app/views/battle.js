@@ -21,7 +21,6 @@ angular.module('langBattle')
 
 
     $scope.submitCard = function(id){
-      console.log(id);
       socket.emit('submitCard', {id: id}, ()=>{
       });
     }
