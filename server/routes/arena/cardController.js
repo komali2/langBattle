@@ -28,7 +28,7 @@ module.exports = {
             .choiceArray
             .push({
               chinese: newArray[rand].chinese,
-              id: newArray[rand.id]});
+              id: newArray[rand].id});
         }
         newArray[key]
           .choiceArray

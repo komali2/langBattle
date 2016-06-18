@@ -88,6 +88,7 @@ module.exports = {
 
     socket.on('submitCard', (data)=>{
       var user = userStorage[socket.id];
+      console.log(data);
       if(user.inBattle){
         //if correct
         if(user.cardArray[user.cardIndex - 1].id === data.id){
