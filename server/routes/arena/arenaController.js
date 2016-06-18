@@ -14,6 +14,8 @@ function User(id){
   this.roomNumber = null;
   this.hasPartner = false;
   this.isReady = false;
+  this.cardArray = [];
+  this.partner = {};
 }
 
 var roomStorage = [];
@@ -53,6 +55,8 @@ module.exports = {
           openRoom++;
           socket.broadcast.to('battleRoom' + stored.roomNumber).emit('hasPartner', {});
           socket.emit('hasPartner', {});
+          user.partner = stored;
+          stored.partner = user;
           break;
         }
       }
@@ -76,38 +80,47 @@ module.exports = {
       var user = userStorage[socket.id];
 
       if(user.inBattle){
-        socket.emit('newCard', cardController.getFlashCard(user.cardIndex));
+        socket.emit('newCard', user.cardArray[0]);
         user.cardIndex++;
       }
+
     });
 
     socket.on('submitCard', (data)=>{
       var user = userStorage[socket.id];
       if(user.inBattle){
-        //if correct
-        if(cardController.checkCorrect(data.english, data.chinese)){
-          if(user.cardIndex < cardController.getSize()){
-            socket
-              .emit('newCard', cardController.getFlashCard(user.cardIndex));
-            user.cardIndex++;
-          }
-          else if(user.cardIndex >= cardController.getSize()){
-            var battleRoom = 'battleRoom' + user.roomNumber;
-            socket.emit('youWin', {'youWon': 'youWon'});
-            socket.broadcast.to(battleRoom).emit('youLose', {'youLost': 'youLost'});
-          }
-        }
-        //if incorrect
-        else{
-          socket.emit('wrongCard', data.chinese);
-        }
-
+        console.log('ah');
       }
-      else{
-
-      }
-
     });
+
+
+    // socket.on('submitCard', (data)=>{
+    //   var user = userStorage[socket.id];
+    //   if(user.inBattle){
+    //     //if correct
+    //     if(cardController.checkCorrect(data.english, data.chinese)){
+    //       if(user.cardIndex < cardController.getSize()){
+    //         socket
+    //           .emit('newCard', cardController.getFlashCard(user.cardIndex));
+    //         user.cardIndex++;
+    //       }
+    //       else if(user.cardIndex >= cardController.getSize()){
+    //         var battleRoom = 'battleRoom' + user.roomNumber;
+    //         socket.emit('youWin', {'youWon': 'youWon'});
+    //         socket.broadcast.to(battleRoom).emit('youLose', {'youLost': 'youLost'});
+    //       }
+    //     }
+    //     //if incorrect
+    //     else{
+    //       socket.emit('wrongCard', data.chinese);
+    //     }
+    //
+    //   }
+    //   else{
+    //
+    //   }
+    //
+    // });
 
     socket.on('youLost', ()=>{
 
@@ -127,8 +140,14 @@ module.exports = {
         socket.broadcast.to(battleRoom).emit('partnerStarted', {});
       }
       else if(counter === 2){
-        socket.broadcast.to(battleRoom).emit('okToStart', {});
-        socket.emit('okToStart', {});
+        cardController.getCardArray(function(cardArray){
+          user.cardArray = cardArray.rows;
+          user.partner.cardArray = cardArray.rows;
+          socket.broadcast.to(battleRoom).emit('okToStart', {});
+          socket.emit('okToStart', {});
+          console.log(user.cardArray);
+        });
+
       }
     })
 
