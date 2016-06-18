@@ -30,7 +30,11 @@ module.exports = {
               chinese: newArray[rand].chinese,
               id: newArray[rand.id]});
         }
-        newArray[key].choiceArray.push(newArray[key].chinese);
+        newArray[key]
+          .choiceArray
+          .push({
+            chinese: newArray[key].chinese,
+            id: newArray[key].id});
       });
       cb(newArray);
     });
