@@ -20,8 +20,8 @@ angular.module('langBattle')
 
 
 
-    $scope.submitCard = function(english, chinese){
-      socket.emit('submitCard', {english: english, chinese: chinese}, ()=>{
+    $scope.submitCard = function(id){
+      socket.emit('submitCard', {id: id}, ()=>{
       });
     }
 
