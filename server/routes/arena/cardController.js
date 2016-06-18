@@ -22,7 +22,7 @@ module.exports = {
       var newArray = cardArray.slice();
       newArray.forEach((el, key)=>{
         newArray[key].choiceArray = [];
-        for(var i = 0; i < 4; i++){
+        for(var i = 0; i < 3; i++){
           var rand = getRandomInt(0, 9);
           newArray[key]
             .choiceArray
