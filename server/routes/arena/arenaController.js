@@ -89,7 +89,23 @@ module.exports = {
     socket.on('submitCard', (data)=>{
       var user = userStorage[socket.id];
       if(user.inBattle){
-        console.log('ah');
+        //if correct
+        if(user.cardArray[user.cardIndex - 1].id === data.id){
+          if(user.cardIndex < 10){
+            socket
+              .emit('newCard', user.cardArray[user.cardIndex]);
+              user.cardIndex++;
+          }
+          else if(user.cardIndex >= 10){
+            var battleRoom = 'battleRoom' + user.roomNumber;
+            socket.emit('youWin', {'youWon':'youWon'});
+            socket.broadcast.to(battleRoom).emit('youLose', {'youLost': 'youLost'});
+          }
+        }
+        //if incorrect
+        else{
+          socket.emit('wrongCard', {});
+        }
       }
     });
 
