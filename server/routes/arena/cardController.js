@@ -19,8 +19,9 @@ module.exports = {
   },
   getCardArray: function(cb){
     db.getRandCards(function(cardArray){
-      var newArray = cardArray.slice()
+      var newArray = cardArray.slice();
       newArray.forEach((el, key)=>{
+        newArray[key].choiceArray = [];
         for(var i = 0; i < 4; i++){
           newArray[key].choiceArray.push(newArray[getRandomInt(0, 9)].chinese)
         }

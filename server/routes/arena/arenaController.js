@@ -141,8 +141,8 @@ module.exports = {
       }
       else if(counter === 2){
         cardController.getCardArray(function(cardArray){
-          user.cardArray = cardArray.rows;
-          user.partner.cardArray = cardArray.rows;
+          user.cardArray = cardArray;
+          user.partner.cardArray = cardArray;
           socket.broadcast.to(battleRoom).emit('okToStart', {});
           socket.emit('okToStart', {});
           console.log(user.cardArray);

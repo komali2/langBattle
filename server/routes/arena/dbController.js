@@ -22,7 +22,7 @@ module.exports = {
         result.addRow(row);
       })
       .on('end', function(result){
-        cb(result);
+        cb(result.rows);
       });
     });
   }
