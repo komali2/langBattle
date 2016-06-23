@@ -16,7 +16,6 @@ function User(id){
 
 
 var openRoom = 0;
-var userStorage = {};
 
 
 
@@ -37,11 +36,11 @@ module.exports = {
     socket.on('joinBattle', ()=>{
 
       //create new user
-      userStorage[socket.id] = new User(socket.id);
-      var user = userStorage[socket.id];
+      storage.userStorage[socket.id] = new User(socket.id);
+      var user = storage.userStorage[socket.id];
       //find a user without a partner
-      for(var ele in userStorage){
-        var stored = userStorage[ele];
+      for(var ele in storage.userStorage){
+        var stored = storage.userStorage[ele];
         if(!stored.inBattle && stored.id !== user.id){
           stored.inBattle = true;
           user.inBattle = true;
@@ -72,7 +71,7 @@ module.exports = {
     });
 
     socket.on('getFirstCard', ()=>{
-      var user = userStorage[socket.id];
+      var user = storage.userStorage[socket.id];
 
       if(user.inBattle){
         socket.emit('newCard', user.cardArray[0]);
@@ -82,7 +81,7 @@ module.exports = {
     });
 
     socket.on('submitCard', (data)=>{
-      var user = userStorage[socket.id];
+      var user = storage.userStorage[socket.id];
       if(user.inBattle){
         //if correct
         if(user.cardArray[user.cardIndex - 1].id === data.id){
@@ -111,7 +110,7 @@ module.exports = {
     });
 
     socket.on('startBattle', ()=>{
-      var user = userStorage[socket.id];
+      var user = storage.userStorage[socket.id];
       var battleRoom = 'battleRoom' + user.roomNumber;
       var counter = 0;
       user.isReady = true;
