@@ -1,11 +1,7 @@
 ioController = require('./ioController.js');
 var cardController = require('./cardController.js');
-var cardList = [
-  ['hello', 'nihao'],
-  ['dog', 'gou'],
-  ['goodbye', 'zaijian'],
-  ['please', 'qing']
-];
+var storage = require('./storage.js');
+
 
 function User(id){
   this.id = id;
@@ -18,7 +14,6 @@ function User(id){
   this.partner = {};
 }
 
-var roomStorage = [];
 
 var openRoom = 0;
 var userStorage = {};
@@ -51,7 +46,7 @@ module.exports = {
           stored.inBattle = true;
           user.inBattle = true;
           user.roomNumber = stored.roomNumber;
-          roomStorage[user.roomNumber].push(user);
+          storage.roomStorage[user.roomNumber].push(user);
           openRoom++;
           socket.broadcast.to('battleRoom' + stored.roomNumber).emit('hasPartner', {});
           socket.emit('hasPartner', {});
@@ -63,7 +58,7 @@ module.exports = {
       //if no open users found, you are first. create new room
       if(!user.inBattle){
         user.roomNumber = openRoom;
-        roomStorage[openRoom] = [user];
+        storage.roomStorage[openRoom] = [user];
 
       }
 
@@ -120,8 +115,8 @@ module.exports = {
       var battleRoom = 'battleRoom' + user.roomNumber;
       var counter = 0;
       user.isReady = true;
-      for(var i = 0; i < roomStorage[user.roomNumber].length; i++){
-        if(roomStorage[user.roomNumber][i].isReady){
+      for(var i = 0; i < storage.roomStorage[user.roomNumber].length; i++){
+        if(storage.roomStorage[user.roomNumber][i].isReady){
           counter++;
         }
       }
