@@ -14,20 +14,8 @@ function User(id){
   this.partner = {};
 }
 
-
-
-
-
 module.exports = {
-  getCards: function(req, res){
-    console.log(req.query.num);
-    if(cardList[req.query.num]){
-      res.status(200).send(cardList[req.query.num]);
-    }
-    else{
-      res.status(500).send("Couldn't find card for query, " + JSON.stringify(req.query));
-    }
-  },
+  
 
   ioConnect: function (socket){
     //socket.on('joinBattle', ioController.handleNewPlayer);
