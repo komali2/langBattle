@@ -8,6 +8,7 @@ angular.module('langBattle')
     $scope.gameMessage = '';
     $scope.hasPartner = false;
     $scope.waiting = true;
+    $scope.battleOngoing = false;
     $scope.exitBattle = function(){
       materialFactory.closeModal('#battleView');
     }
@@ -30,6 +31,7 @@ angular.module('langBattle')
       });
       $scope.battleStarted = true;
       $scope.battleStatus = 'In Battle!'
+      $scope.battleOngoing = true;
     }
 
     $scope.startBattle = function(){
@@ -62,10 +64,13 @@ angular.module('langBattle')
 
     socket.on('youWin', (data)=>{
       $scope.gameMessage = 'You Win!';
+      $scope.battleOngoing = false;
     });
 
     socket.on('youLose', (data)=>{
       $scope.gameMessage = 'You Lose.';
+      $scope.battleOngoing = false;
+
     });
 
     socket.on('hasPartner', (data)=>{
