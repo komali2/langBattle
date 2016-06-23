@@ -15,7 +15,6 @@ function User(id){
 }
 
 
-var openRoom = 0;
 
 
 
@@ -46,7 +45,7 @@ module.exports = {
           user.inBattle = true;
           user.roomNumber = stored.roomNumber;
           storage.roomStorage[user.roomNumber].push(user);
-          openRoom++;
+          storage.openRoom++;
           socket.broadcast.to('battleRoom' + stored.roomNumber).emit('hasPartner', {});
           socket.emit('hasPartner', {});
           user.partner = stored;
@@ -56,8 +55,8 @@ module.exports = {
       }
       //if no open users found, you are first. create new room
       if(!user.inBattle){
-        user.roomNumber = openRoom;
-        storage.roomStorage[openRoom] = [user];
+        user.roomNumber = storage.openRoom;
+        storage.roomStorage[storage.openRoom] = [user];
 
       }
 
