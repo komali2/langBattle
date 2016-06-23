@@ -11,10 +11,11 @@ describe('battle', function(){
   });
 
   beforeEach(inject(function($templateCache) {
-    templateHtml = $templateCache.get('views/battle.html');
+    templateHtml = $templateCache.get('#/home/views/battle.html');
     if(!templateHtml) {
-        templateHtml = $.ajax('views/battle.html', {async: false}).responseText;
-        $templateCache.put('views/battle.html', templateHtml)
+        templateHtml = $.ajax('#/home/views/battle.html', {async: false}).responseText;
+        $templateCache.put('#/home/views/battle.html', templateHtml)
+        console.log(templateHtml);
     }
   }));
 
@@ -31,7 +32,6 @@ describe('battle', function(){
         }));
 
         it('should find divs', function(){
-          console.log(formElement);
           expect(formElement.find('#battleView').length).toBe(1);
         });
   });
