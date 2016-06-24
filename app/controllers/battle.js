@@ -13,12 +13,11 @@ angular.module('langBattle')
       materialFactory.closeModal('#battleView');
     }
 
+
     $scope.cardNum = 0;
     $scope.submitChat = function(){
       socket.emit('chat', 'test');
     }
-
-
 
 
     $scope.submitCard = function(id){
@@ -81,4 +80,9 @@ angular.module('langBattle')
 
 
 
-  }]);
+  }])
+    .directive('battleDirective', function(){
+      return {
+        templateUrl: '../views/arena.html'
+      }
+    });
