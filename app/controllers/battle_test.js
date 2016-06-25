@@ -17,8 +17,13 @@ describe('battle', function(){
       it('should work', function(){
         state.expectTransitionTo('home');
         var element = $compile("<battle-directive></battle-directive>")($rootScope);
+        //$rootScope.$digest();
         $rootScope.$apply();
-        console.log(element[0]);
+        //element = (element.outerHTML);
+        //element = (element.innerHTML);
+        console.log(element.html());
+        //element = (element[0].outerHTML);
+        //element = (element[0].innerHTML);
 
         expect(element.find('div').length).toEqual(10);
       })

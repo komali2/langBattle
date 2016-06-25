@@ -84,6 +84,6 @@ angular.module('langBattle')
     .directive('battleDirective', function(){
       return {
         templateUrl: '../views/arena.html',
-        controller: 'myController'
+        controller: 'battleController'
       }
     });
