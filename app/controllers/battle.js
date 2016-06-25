@@ -83,6 +83,7 @@ angular.module('langBattle')
   }])
     .directive('battleDirective', function(){
       return {
-        templateUrl: '../views/arena.html'
+        templateUrl: '../views/arena.html',
+        controller: 'myController'
       }
     });

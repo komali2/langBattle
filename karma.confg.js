@@ -2,6 +2,20 @@ module.exports = function(config){
   config.set({
 
     basePath: './app',
+    plugins: [
+      'karma-chrome-launcher',
+      'karma-jasmine',
+      'karma-ng-html2js-preprocessor'
+    ],
+
+    preprocessors: {
+      'views/**/*.html': ["ng-html2js"]
+    },
+
+    ngHtml2JsPreprocessor: {
+      
+      moduleName: "templates"
+    },
 
     files: [
       'bower_components/angular/angular.js',
@@ -15,15 +29,13 @@ module.exports = function(config){
       'http://localhost:8080/socket.io/socket.io.js'
     ],
 
+
+
     autoWatch: true,
 
     frameworks: ['jasmine'],
 
-    browsers: ['Chrome'],
+    browsers: ['Chrome']
 
-    plugins: [
-      'karma-chrome-launcher',
-      'karma-jasmine',
-    ]
   });
 };
