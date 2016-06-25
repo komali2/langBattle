@@ -14,7 +14,6 @@ module.exports = function(config){
     },
 
     ngHtml2JsPreprocessor: {
-
       moduleName: "templates"
     },
 
@@ -27,6 +26,7 @@ module.exports = function(config){
       'views/**/*.js',
       'views/**/*.html',
       'controllers/**/*.js',
+      'test/mock/*.js',
       'http://localhost:8080/socket.io/socket.io.js'
     ],
 
