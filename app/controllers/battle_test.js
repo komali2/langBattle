@@ -1,4 +1,4 @@
-describe('battle', function(){
+describe('battle view', function(){
   beforeEach(module('langBattle'));
 
   describe('battleController', function(){
@@ -7,10 +7,6 @@ describe('battle', function(){
       var battleController = $controller('battleController', {$scope:scope});
       expect(battleController).toBeDefined();
     }));
-
-    describe('battle View', function(){
-
-    });
 
   });
 });

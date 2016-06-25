@@ -10,7 +10,6 @@ module.exports = function(config){
       'app.js',
       'factories/**/*.js',
       'views/**/*.js',
-      'view/**/*.html',
       'controllers/**/*.js',
       'http://localhost:8080/socket.io/socket.io.js'
     ],
