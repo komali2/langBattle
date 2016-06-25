@@ -9,6 +9,9 @@ app.config(function($routeProvider){
       controller: 'homeController',
       controllerAs: 'home'
     })
+    .when('/about', {
+      templateUrl: 'views/about.html'
+    })
     .otherwise({
       redirectTo: '/home'
     });
