@@ -9,11 +9,12 @@ module.exports = function(config){
     ],
 
     preprocessors: {
-      'views/**/*.html': ["ng-html2js"]
+      'views/**/*.html': ["ng-html2js"],
+
     },
 
     ngHtml2JsPreprocessor: {
-      
+
       moduleName: "templates"
     },
 
@@ -24,7 +25,7 @@ module.exports = function(config){
       'app.js',
       'factories/**/*.js',
       'views/**/*.js',
-      'view/**/*.html',
+      'views/**/*.html',
       'controllers/**/*.js',
       'http://localhost:8080/socket.io/socket.io.js'
     ],
