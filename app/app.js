@@ -9,6 +9,10 @@ app.config(function($routeProvider){
       controller: 'homeController',
       controllerAs: 'home'
     })
+    .when('/arena', {
+      templateUrl: 'views/battleStage.html',
+      controller: 'arenaController'
+    })
     .when('/about', {
       templateUrl: 'views/about.html'
     })
