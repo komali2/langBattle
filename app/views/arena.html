@@ -19,28 +19,28 @@
      <button
       ng-hide='!battleStarted'
       class='waves-effect waves-light btn-flat col s1 m2'
-      ng-click='submitCard(currCard.choiceArray[0].id)'
+      ng-click='submitCard(0)'
       ng-disabled='!battleOngoing'>
       {{currCard.choiceArray[0].chinese}}
     </button>
     <button
      ng-hide='!battleStarted'
      class='waves-effect waves-light btn-flat col s1 m2'
-     ng-click='submitCard(currCard.choiceArray[1].id)'
+     ng-click='submitCard(1)'
      ng-disabled='!battleOngoing'>
      {{currCard.choiceArray[1].chinese}}
    </button>
    <button
     ng-hide='!battleStarted'
     class='waves-effect waves-light btn-flat col s1 m2'
-    ng-click='submitCard(currCard.choiceArray[2].id)'
+    ng-click='submitCard(2)'
     ng-disabled='!battleOngoing'>
     {{currCard.choiceArray[2].chinese}}
   </button>
   <button
    ng-hide='!battleStarted'
    class='waves-effect waves-light btn-flat col s1 m2'
-   ng-click='submitCard(currCard.choiceArray[3].id)'
+   ng-click='submitCard(3)'
    ng-disabled='!battleOngoing'>
    {{currCard.choiceArray[3].chinese}}
  </button>

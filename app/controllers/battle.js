@@ -1,7 +1,7 @@
 angular.module('langBattle')
   .controller('battleController',
-  ['$scope', 'socket', '$http', 'materialFactory', 'cardFactory',
-  function($scope, socket, $http, materialFactory, cardFactory){
+  ['$scope', 'socket', '$http', 'materialFactory', 'cardFactory', 'battleFactory',
+  function($scope, socket, $http, materialFactory, cardFactory, battleFactory){
     $scope.battleStatus = 'Waiting for Partner...';
     $scope.currCard = {};
     $scope.currCard.english = 'You will see a word here. Select the Chinese translation!';
@@ -14,15 +14,8 @@ angular.module('langBattle')
     }
 
 
-    $scope.cardNum = 0;
-    $scope.submitChat = function(){
-      socket.emit('chat', 'test');
-    }
-
-
-    $scope.submitCard = function(id){
-      socket.emit('submitCard', {id: id}, ()=>{
-      });
+    $scope.submitCard = function(i){
+      cardFactory.submitCard(i);
     }
 
     $scope.getFirstCard = function(){
@@ -41,45 +34,38 @@ angular.module('langBattle')
       });
     }
 
-    socket.on('okToStart', (data)=>{
+    $scope.$on('battle:okToStart', (data)=>{
       $scope.getFirstCard();
       $scope.waiting = false;
       $scope.gameMessage = '';
     });
 
-    socket.on('partnerStarted', (data)=>{
+    $scope.$on('battle:partnerStarted', (data)=>{
       $scope.gameMessage = 'Your Partner is Ready!'
     });
 
-    // socket.on('newCard', (data)=>{
-    //   $scope.currCard = data;
-    //   $scope.gameMessage = '';
-    // });
-
     $scope.$on('card:newCard', function(event, data){
-      console.log('received card', data);
       $scope.currCard = data;
       $scope.gameMessage = '';
     });
 
 
-    socket.on('wrongCard', (data)=>{
+    $scope.$on('card:wrongCard', (event, data)=>{
       $scope.gameMessage='Wrong Card!';
-      $scope.serverMessage = data;
-    })
+    });
 
-    socket.on('youWin', (data)=>{
+    $scope.$on('battle:youWin', (data)=>{
       $scope.gameMessage = 'You Win!';
       $scope.battleOngoing = false;
     });
 
-    socket.on('youLose', (data)=>{
+    $scope.$on('battle:youLose', (data)=>{
       $scope.gameMessage = 'You Lose.';
       $scope.battleOngoing = false;
 
     });
 
-    socket.on('hasPartner', (data)=>{
+    $scope.$on('battle:hasPartner', (data)=>{
       $scope.hasPartner = true;
       $scope.battleStatus = 'Press Start...';
       $('#startBattle').removeClass('disabled');
