@@ -4,11 +4,12 @@ angular.module('langBattle')
   function($scope, socket, $http, materialFactory, cardFactory, battleFactory){
     $scope.battleStatus = 'Waiting for Partner...';
     $scope.currCard = {};
-    $scope.currCard.english = 'You will see a word here. Select the Chinese translation!';
     $scope.gameMessage = '';
     $scope.hasPartner = false;
     $scope.waiting = true;
     $scope.battleOngoing = false;
+    $scope.question = '';
+
     $scope.exitBattle = function(){
       materialFactory.closeModal('#battleView');
     }
@@ -46,6 +47,8 @@ angular.module('langBattle')
 
     $scope.$on('card:newCard', function(event, data){
       $scope.currCard = data;
+      console.log(data[$scope.native]);
+      $scope.question = data[$scope.native];
       $scope.gameMessage = '';
     });
 
