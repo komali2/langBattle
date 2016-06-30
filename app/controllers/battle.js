@@ -1,7 +1,7 @@
 angular.module('langBattle')
   .controller('battleController',
-  ['$scope', 'socket', '$http', 'materialFactory',
-  function($scope, socket, $http, materialFactory){
+  ['$scope', 'socket', '$http', 'materialFactory', 'cardFactory',
+  function($scope, socket, $http, materialFactory, cardFactory){
     $scope.battleStatus = 'Waiting for Partner...';
     $scope.currCard = {};
     $scope.currCard.english = 'You will see a word here. Select the Chinese translation!';
@@ -51,10 +51,17 @@ angular.module('langBattle')
       $scope.gameMessage = 'Your Partner is Ready!'
     });
 
-    socket.on('newCard', (data)=>{
+    // socket.on('newCard', (data)=>{
+    //   $scope.currCard = data;
+    //   $scope.gameMessage = '';
+    // });
+
+    $scope.$on('card:newCard', function(event, data){
+      console.log('received card', data);
       $scope.currCard = data;
       $scope.gameMessage = '';
     });
+
 
     socket.on('wrongCard', (data)=>{
       $scope.gameMessage='Wrong Card!';

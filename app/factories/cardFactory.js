@@ -7,8 +7,8 @@ angular.module('langBattle')
     }
 
     socket.on('newCard', (data)=>{
-      
-    })
+      $rootScope.$broadcast('card:newCard', data);
+    });
 
     return objOut;
   });
