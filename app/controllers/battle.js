@@ -4,7 +4,7 @@ angular.module('langBattle')
   function($scope, socket, $http, materialFactory, cardFactory, battleFactory){
     $scope.battleStatus = 'Waiting for Partner...';
     $scope.currCard = {};
-    $scope.gameMessage = '';
+    $scope.gameMessage = 'You will see a question in ' + $scope.native + ', choose the correct translation!';
     $scope.hasPartner = false;
     $scope.waiting = true;
     $scope.battleOngoing = false;
