@@ -8,8 +8,11 @@ angular.module('langBattle')
       });
     }
 
-    objOut.joinBattle = function(type){
-      socket.emit('joinBattle');
+    objOut.joinBattle = function(type, native, foreign){
+      socket.emit('joinBattle', {
+        foreign: foreign,
+        native: native
+      });
     }
 
     socket.on('okToStart', (data)=>{

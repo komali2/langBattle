@@ -7,6 +7,6 @@ angular.module('langBattle')
 
       $scope.joinBattle = function(type){
         materialFactory.openModal('#battleView');
-        battleFactory.joinBattle(type);
+        battleFactory.joinBattle(type, $scope.native, $scope.foreign);
       }
     }]);

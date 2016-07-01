@@ -3,10 +3,9 @@ var ioController = require('./ioController.js');
 module.exports = {
 
   ioConnect: function (socket){
-    //socket.on('joinBattle', ioController.handleNewPlayer);
     console.log('enter player: ', socket.id);
-    socket.on('joinBattle', ()=>{
-      ioController.handleNewPlayer(socket);
+    socket.on('joinBattle', (data)=>{
+      ioController.handleNewPlayer(socket, data);
     });
 
     socket.on('getFirstCard', ()=>{

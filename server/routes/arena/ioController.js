@@ -2,7 +2,7 @@ var storage = require('./storage.js');
 var cardController = require('./cardController.js');
 
 
-function User(id){
+function User(id, foreign, native){
   this.id = id;
   this.cardIndex = 0;
   this.inBattle = false;
@@ -11,13 +11,15 @@ function User(id){
   this.isReady = false;
   this.cardArray = [];
   this.partner = {};
+  this.foreign = foreign;
+  this.native = native;
 }
 
 
 module.exports = {
-  handleNewPlayer: function(socket){
+  handleNewPlayer: function(socket, data){
     //create new user
-    storage.userStorage[socket.id] = new User(socket.id);
+    storage.userStorage[socket.id] = new User(socket.id, data.foreign, data.native);
     var user = storage.userStorage[socket.id];
     //find a user without a partner
     for(var ele in storage.userStorage){

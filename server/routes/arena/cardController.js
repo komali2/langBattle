@@ -1,22 +1,7 @@
-var cardStorage = require('./cardStorage.js').english;
 var db = require('./dbController.js');
 
 module.exports = {
-  getFlashCard: function(index){
-    return cardStorage[index];
-  },
-  getSize: function(){
-    return cardStorage.length;
-  },
-  checkCorrect: function(english, chinese){
-    var check = false;
-    for(var i = 0; i < cardStorage.length; i++){
-      if(cardStorage[i].english === english && cardStorage[i].chinese === chinese){
-        check = true;
-      }
-    }
-    return check;
-  },
+
   getCardArray: function(cb){
     db.getRandCards(function(cardArray){
       var newArray = cardArray.slice();
@@ -27,15 +12,21 @@ module.exports = {
           newArray[key]
             .choiceArray
             .push({
+              french: newArray[rand].french,
+              spanish: newArray[rand].spanish,
               chinese: newArray[rand].chinese,
               id: newArray[rand].id});
         }
         newArray[key]
           .choiceArray
           .push({
+            french: newArray[key].french,
+            spanish: newArray[key].spanish,
+            english: newArray[key].english,
             chinese: newArray[key].chinese,
             id: newArray[key].id});
         shuffle(newArray[key].choiceArray);
+        console.log(newArray);
       });
       cb(newArray);
     });

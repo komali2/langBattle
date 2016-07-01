@@ -17,7 +17,7 @@ module.exports = {
     pg.connect(process.env.DATABASE_URL, function(err, client){
       if(err) throw err;
       client
-      .query('SELECT id,english,chinese FROM words limit 10 offset ' + offset)
+      .query('SELECT id,english,chinese,spanish,french FROM words limit 10 offset ' + offset)
       .on('row', function(row, result){
         result.addRow(row);
       })
