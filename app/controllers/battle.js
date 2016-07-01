@@ -30,6 +30,7 @@ angular.module('langBattle')
       $scope.waiting = true;
       $scope.battleStatus = 'Waiting for partner to start...'
       battleFactory.startBattle();
+      console.log($scope.type);
     }
 
     $scope.$on('battle:okToStart', (data)=>{
@@ -75,6 +76,7 @@ angular.module('langBattle')
   }])
     .directive('battleDirective', function(){
       return {
+
         templateUrl: '../views/arena.html',
         controller: 'battleController'
       }

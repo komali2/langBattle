@@ -8,7 +8,7 @@ angular.module('langBattle')
       });
     }
 
-    objOut.joinBattle = function(){
+    objOut.joinBattle = function(type){
       socket.emit('joinBattle');
     }
 

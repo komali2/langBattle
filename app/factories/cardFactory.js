@@ -14,7 +14,6 @@ angular.module('langBattle')
     }
 
     socket.on('newCard', (data)=>{
-      console.log(data);
       cardArray = data.choiceArray;
       $rootScope.$broadcast('card:newCard', data);
     });
