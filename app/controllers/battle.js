@@ -45,6 +45,7 @@ angular.module('langBattle')
 
     $scope.$on('card:newCard', function(event, data){
       $scope.currCard = data;
+      console.log('new card is ', data);
       $scope.question = data[$scope.native];
       $scope.gameMessage = '';
     });

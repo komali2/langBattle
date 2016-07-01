@@ -15,6 +15,7 @@ module.exports = {
               french: newArray[rand].french,
               spanish: newArray[rand].spanish,
               chinese: newArray[rand].chinese,
+              english: newArray[rand].english,
               id: newArray[rand].id});
         }
         newArray[key]
