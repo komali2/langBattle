@@ -1,9 +1,12 @@
 <div class='row section'>
   <div class='section z-depth-2 row'>
-    <div class='col s4'>{{native}}</div>
-    <div class='col s4'>speaker studying </div>
-    <div class='col s4'>{{foreign}}</div>
+    <div class='row'>
+      <div class='col s4 left-align'><h4>&nbsp;{{native}}...</h4></div>
+      <div class='col s4 center-align'><h5>speaker studying</h5> </div>
+      <div class='col s4 right-align'><h4>...{{foreign}}&nbsp;</h4></div>
+  </div>
 
+  <div class='row'>
     <div class='col s6'>
 
     <button class="colwaves-effect waves-light btn" ng-click='setNative("english")'>English</button>
@@ -17,6 +20,7 @@
     <button class="colwaves-effect waves-light btn" ng-click='setForeign("french")'>French</button>
     <button class="colwaves-effect waves-light btn" ng-click='setForeign("chinese")'>Chinese</button>
     </div>
+  </div>
 
 
   </div>
