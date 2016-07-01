@@ -4,7 +4,7 @@ angular.module('langBattle')
   function($scope, socket, $http, materialFactory, cardFactory, battleFactory){
     $scope.battleStatus = 'Waiting for Partner...';
     $scope.currCard = {};
-    $scope.gameMessage = 'You will see a question in ' + $scope.native + ', choose the correct translation!';
+    $scope.gameMessage = 'You will see a word, choose the correct translation! Finish all the words before your partner does.';
     $scope.hasPartner = false;
     $scope.waiting = true;
     $scope.battleOngoing = false;
@@ -30,7 +30,6 @@ angular.module('langBattle')
       $scope.waiting = true;
       $scope.battleStatus = 'Waiting for partner to start...'
       battleFactory.startBattle();
-      console.log($scope.type);
     }
 
     $scope.$on('battle:okToStart', (data)=>{
@@ -45,7 +44,6 @@ angular.module('langBattle')
 
     $scope.$on('card:newCard', function(event, data){
       $scope.currCard = data;
-      console.log('new card is ', data);
       $scope.question = data[$scope.native];
       $scope.gameMessage = '';
     });

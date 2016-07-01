@@ -27,7 +27,6 @@ module.exports = {
             chinese: newArray[key].chinese,
             id: newArray[key].id});
         shuffle(newArray[key].choiceArray);
-        console.log(newArray);
       });
       cb(newArray);
     });
