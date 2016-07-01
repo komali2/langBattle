@@ -20,8 +20,7 @@ angular.module('langBattle')
     }
 
     $scope.getFirstCard = function(){
-      socket.emit('getFirstCard', {}, ()=>{
-      });
+      cardFactory.getFirstCard();
       $scope.battleStarted = true;
       $scope.battleStatus = 'In Battle!'
       $scope.battleOngoing = true;
@@ -30,9 +29,7 @@ angular.module('langBattle')
     $scope.startBattle = function(){
       $scope.waiting = true;
       $scope.battleStatus = 'Waiting for partner to start...'
-      socket.emit('startBattle', {}, ()=>{
-
-      });
+      battleFactory.startBattle();
     }
 
     $scope.$on('battle:okToStart', (data)=>{
@@ -47,7 +44,6 @@ angular.module('langBattle')
 
     $scope.$on('card:newCard', function(event, data){
       $scope.currCard = data;
-      console.log(data[$scope.native]);
       $scope.question = data[$scope.native];
       $scope.gameMessage = '';
     });

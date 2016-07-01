@@ -8,6 +8,11 @@ angular.module('langBattle')
       socket.emit('submitCard', {id: id});
     }
 
+    objOut.getFirstCard = function(){
+      socket.emit('getFirstCard', {}, ()=>{
+      });
+    }
+
     socket.on('newCard', (data)=>{
       console.log(data);
       cardArray = data.choiceArray;
@@ -18,7 +23,7 @@ angular.module('langBattle')
       $rootScope.$broadcast('card:wrongCard', data);
     });
 
-    
+
 
     return objOut;
   });

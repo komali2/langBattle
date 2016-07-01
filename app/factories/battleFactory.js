@@ -2,6 +2,16 @@ angular.module('langBattle')
   .factory('battleFactory', function($rootScope, socket, $http){
     var objOut = {};
 
+    objOut.startBattle = function(){
+      socket.emit('startBattle', {}, ()=>{
+
+      });
+    }
+
+    objOut.joinBattle = function(){
+      socket.emit('joinBattle');
+    }
+
     socket.on('okToStart', (data)=>{
       $rootScope.$broadcast('battle:okToStart', data);
     });
