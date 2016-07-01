@@ -9,4 +9,13 @@ angular.module('langBattle')
         materialFactory.openModal('#battleView');
         battleFactory.joinBattle(type, $scope.native, $scope.foreign);
       }
+
+      $scope.setNative = function(lang){
+        $scope.native = lang;
+      }
+
+      $scope.setForeign = function(lang){
+        $scope.foreign = lang;
+      }
+
     }]);
