@@ -1,4 +1,5 @@
 var ioController = require('./ioController.js');
+var storage = require('./storage.js');
 
 module.exports = {
 
@@ -13,7 +14,12 @@ module.exports = {
     });
 
     socket.on('submitCard', (data)=>{
-      ioController.submitCard(socket, data);
+      if(storage.userStorage[socket.id].mode === 'timeTrial'){
+        ioController.submitCard(socket, data);
+      }
+      else if(storage.userStorage[socket.id].mode === 'accuracy'){
+        ioController.accuracyHandleSubmit(socket, data);
+      }
     });
 
     socket.on('youLost', ()=>{

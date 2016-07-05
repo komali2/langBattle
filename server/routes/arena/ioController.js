@@ -86,7 +86,33 @@ module.exports = {
         socket.emit('wrongCard', {});
       }
     }
+  },
 
+  accuracyHandleSubmit: function(socket, data){
+    var user = storage.userStorage[socket.id];
+    //if the user is in battle
+    if(user.inBattle){
+      //if card is correct
+      if(){
+        //if was last card
+          //if partner not finished
+
+          //if partner also finished
+
+        //if need new card
+
+      }
+      //if card is incorrect
+      else if(){
+        //if was last card
+          //if parter not finished
+
+          //if partner also finished
+
+        //if need new card
+      }
+
+    }
   },
 
   startBattle: function(socket){
