@@ -76,6 +76,8 @@ module.exports = {
           var battleRoom = 'battleRoom' + user.roomNumber;
           socket.emit('youWin', {'youWon':'youWon'});
           socket.broadcast.to(battleRoom).emit('youLose', {'youLost': 'youLost'});
+          user.inBattle = false;
+          user.partner.inBattle = false;
         }
       }
       //if incorrect
