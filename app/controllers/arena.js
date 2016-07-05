@@ -5,9 +5,9 @@ angular.module('langBattle')
       $scope.native = 'english';
       $scope.foreign = 'chinese';
 
-      $scope.joinBattle = function(type){
+      $scope.joinBattle = function(mode){
         materialFactory.openModal('#battleView');
-        battleFactory.joinBattle(type, $scope.native, $scope.foreign);
+        battleFactory.joinBattle($scope.native, $scope.foreign, mode);
       }
 
       $scope.setNative = function(lang){

@@ -8,10 +8,12 @@ angular.module('langBattle')
       });
     }
 
-    objOut.joinBattle = function(type, native, foreign){
+    objOut.joinBattle = function(native, foreign, mode){
+      console.log('mode is ', mode);
       socket.emit('joinBattle', {
         foreign: foreign,
-        native: native
+        native: native,
+        mode: mode
       });
     }
 
