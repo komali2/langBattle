@@ -96,56 +96,73 @@ module.exports = {
     if(user.inBattle){
       //if card is correct
       if(user.cardArray[user.cardIndex -1].id === data.id){
-        //if was last card
-        if(user.cardIndex >= 10){
-          //if partner not finished
-          if(!user.partner.isFinished){
-            //set current user to be finished
-            user.isFinished = true;
-            //do nothing else
-          }
-          //if partner also finished
-          else if(user.partner.isFinished){
-            var battleRoom = 'battleRoom' + user.roomNumber;
-
-            //set current partner to finished
-            user.isFinished = true;
-            //check who won
-            //if this socket won
-            if(user.numCorrect > user.partner.numCorrect){
-              //tell socket it won, send stats
-              socket.emit('youWin', {
-                'youCorrect': user.numCorrect,
-                'partnerCorrect': user.partner.numCorrect
-              });
-              //tell enemy it lost, send stats
-              socket.broadcast.to(battleRoom).emit('youLose', {
-                'youCorrect': user.numCorrect,
-                'partnerCorrect': user.partner.numCorrect
-              });
-            }
-            //if the other player won
-            else if(user.numCorrect < user.partner.numCorrect){
-              //TODO: tell socket it lost, send stats
-
-              //TODO: tell enemy it won, send stats
-            }
-          }
+        user.numCorrect++;
+      }
+      //if was last card
+      if(user.cardIndex >= 10){
+        //if partner not finished
+        if(!user.partner.isFinished){
+          //set current user to be finished
+          user.isFinished = true;
+          //do nothing else
         }
-        //TODO: if need new card
-        else if(user.cardIndex < 10){
+        //if partner also finished
+        else if(user.partner.isFinished){
+          var battleRoom = 'battleRoom' + user.roomNumber;
 
+          //set current partner to finished
+          user.isFinished = true;
+          //check who won
+          //if this socket won
+          if(user.numCorrect > user.partner.numCorrect){
+            //tell socket it won, send stats
+            socket.emit('youWin', {
+              'youCorrect': user.numCorrect,
+              'partnerCorrect': user.partner.numCorrect
+            });
+            //tell enemy it lost, send stats
+            socket.broadcast.to(battleRoom).emit('youLose', {
+              'youCorrect': user.numCorrect,
+              'partnerCorrect': user.partner.numCorrect
+            });
+          }
+          //if the other player won
+          else if(user.numCorrect < user.partner.numCorrect){
+            //TODO: tell socket it lost, send stats
+            socket.emit('youLose', {
+              'youCorrect': user.numCorrect,
+              'partnerCorrect': user.partner.numCorrect
+            });
+            //tell enemy it won, send stats
+            socket.broadcast.to(battleRoom).emit('youWin', {
+              'youCorrect': user.numCorrect,
+              'partnerCorrect': user.partner.numCorrect
+            });
+          }
         }
       }
+      //TODO: if need new card
+      else if(user.cardIndex < 10){
+        socket.emit('newCard', user.cardArray[user.cardIndex]);
+        user.cardIndex++;
+      }
+
       //if card is incorrect
-      else if(user.cardArray[user.cardIndex - 1].id !== data.id){
-        //TODO: if was last card
-          //if parter not finished
-
-          //if partner also finished
-
-        //TODO: if need new card
-      }
+      // else if(user.cardArray[user.cardIndex - 1].id !== data.id){
+      //   //TODO: if was last card
+      //   if(user.cardIndex >= 10){
+      //     //if parter not finished
+      //
+      //     //if partner also finished
+      //
+      //   }
+      //
+      //   //TODO: if need new card
+      //   else if(user.cardIndex < 10){
+      //     socket.emit('newCard', user.cardArray[user.cardIndex]);
+      //     user.cardIndex++;
+      //   }
+      // }
 
     }
   },
