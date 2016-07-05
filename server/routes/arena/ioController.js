@@ -14,8 +14,6 @@ function User(id, foreign, native, mode){
   this.foreign = foreign;
   this.native = native;
   this.mode = mode;
-  this.numCorrect = 0;
-  this.finished = false;
 }
 
 
@@ -24,9 +22,6 @@ module.exports = {
     //create new user
     storage.userStorage[socket.id] = new User(socket.id, data.foreign, data.native, data.mode);
     var user = storage.userStorage[socket.id];
-    if(user.mode === 'accuracy'){
-      user.numCorrect = 0;
-    }
     //find a user without a partner
     for(var ele in storage.userStorage){
       var stored = storage.userStorage[ele];
@@ -73,73 +68,22 @@ module.exports = {
     if(user.inBattle){
       //if correct
       if(user.cardArray[user.cardIndex - 1].id === data.id){
-        if(user.mode === 'timeTrial'){
-          if(user.cardIndex < 10){
-            socket
-              .emit('newCard', user.cardArray[user.cardIndex]);
-              user.cardIndex++;
-          }
-          else if(user.cardIndex >= 10){
-            var battleRoom = 'battleRoom' + user.roomNumber;
-            socket.emit('youWin', {'youWon':'youWon'});
-            socket.broadcast.to(battleRoom).emit('youLose', {'youLost': 'youLost'});
-            user.inBattle = false;
-            user.partner.inBattle = false;
-          }
+        if(user.cardIndex < 10){
+          socket
+            .emit('newCard', user.cardArray[user.cardIndex]);
+            user.cardIndex++;
         }
-        else if(user.mode === 'accuracy'){
-          //if this socket isn't done yet
-          if(user.cardIndex < 10){
-            socket
-              .emit('newCard', user.cardArray[user.cardIndex]);
-            user.numCorrect++;
-          }
-          //if this socket is done but their partner isn't
-          else if(!user.partner.isFinished){
-            socket.broadcast('partnerStarted');
-          }
-          //if this socket and their partner are finished
-          else if(user.partner.isFinished){
-            //if this socket won
-            if(user.numCorrect > user.partner.numCorrect){
-              socket.emit('youWin',
-                {
-                  youCorrect: user.numCorrect,
-                  partnerCorrect: user.partner.numCorrect
-                });
-              socket.broadcast.to(battleRoom).emit('youLose',
-              {
-                youCorrect: user.numCorrect,
-                partnerCorrect: user.partner.numCorrect
-              });
-              user.inBattle = false;
-              user.partner.inBattle = false;
-            }
-            //if this socket lost
-            else if(user.numCorrect < user.partner.numCorrect){
-              socket.emit('youLose',
-                {
-                  youCorrect: user.numCorrect,
-                  partnerCorrect: user.partner.numCorrect
-                });
-              socket.broadcast.to(battleRoom).emit('youWin',
-              {
-                youCorrect: user.numCorrect,
-                partnerCorrect: user.partner.numCorrect
-              });
-            }
-          }
+        else if(user.cardIndex >= 10){
+          var battleRoom = 'battleRoom' + user.roomNumber;
+          socket.emit('youWin', {'youWon':'youWon'});
+          socket.broadcast.to(battleRoom).emit('youLose', {'youLost': 'youLost'});
+          user.inBattle = false;
+          user.partner.inBattle = false;
         }
       }
-      //if incorrect and in timetrial mode
-      else if(user.mode === 'timeTrial'){
+      //if incorrect
+      else{
         socket.emit('wrongCard', {});
-      }
-      //if not in timetrial mode
-      else if(user.mode === 'accuracy'){
-        socket
-          .emit('newCard', user.cardArray[user.cardIndex]);
-          user.cardIndex++;
       }
     }
 
