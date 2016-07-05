@@ -9,7 +9,6 @@ angular.module('langBattle')
     }
 
     objOut.joinBattle = function(native, foreign, mode){
-      console.log('mode is ', mode);
       socket.emit('joinBattle', {
         foreign: foreign,
         native: native,
@@ -29,6 +28,7 @@ angular.module('langBattle')
     });
 
     socket.on('youLose', (data)=>{
+      console.log('lose message was', data);
       $rootScope.$broadcast('battle:youLose', data);
     });
 

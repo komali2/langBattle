@@ -4,8 +4,10 @@ angular.module('langBattle')
     function($scope, $http, materialFactory, battleFactory){
       $scope.native = 'english';
       $scope.foreign = 'chinese';
+      $scope.mode = '';
 
       $scope.joinBattle = function(mode){
+        $scope.mode = mode;
         materialFactory.openModal('#battleView');
         battleFactory.joinBattle($scope.native, $scope.foreign, mode);
       }

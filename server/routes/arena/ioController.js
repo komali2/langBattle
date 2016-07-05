@@ -122,8 +122,8 @@ module.exports = {
             });
             //tell enemy it lost, send stats
             socket.broadcast.to(battleRoom).emit('youLose', {
-              'youCorrect': user.numCorrect,
-              'partnerCorrect': user.partner.numCorrect
+              'youCorrect': user.partner.numCorrect,
+              'partnerCorrect': user.numCorrect
             });
           }
           //if the other player won
@@ -135,8 +135,8 @@ module.exports = {
             });
             //tell enemy it won, send stats
             socket.broadcast.to(battleRoom).emit('youWin', {
-              'youCorrect': user.numCorrect,
-              'partnerCorrect': user.partner.numCorrect
+              'youCorrect': user.partner.numCorrect,
+              'partnerCorrect': user.numCorrect
             });
           }
           //if it was tied

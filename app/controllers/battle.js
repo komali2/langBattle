@@ -53,9 +53,9 @@ angular.module('langBattle')
       $scope.gameMessage='Wrong Card!';
     });
 
-    $scope.$on('battle:youWin', (data)=>{
+    $scope.$on('battle:youWin', (event, data)=>{
       var message = "You Win";
-      if(data.youCorrect){
+      if($scope.mode === 'accuracy'){
         message += ' You: ' + data.youCorrect + '. ';
         message += 'Your partner: ' + data.partnerCorrect + '.';
       }
@@ -64,9 +64,9 @@ angular.module('langBattle')
       $scope.battleOngoing = false;
     });
 
-    $scope.$on('battle:youLose', (data)=>{
+    $scope.$on('battle:youLose', (event, data)=>{
       var message = "You Lose";
-      if(data.youCorrect){
+      if($scope.mode === 'accuracy'){
         message += ' You: ' + data.youCorrect + '. ';
         message += 'Your partner: ' + data.partnerCorrect + '.';
       }
@@ -76,7 +76,7 @@ angular.module('langBattle')
 
     });
 
-    $scope.$on('battle:tie', (dta)=>{
+    $scope.$on('battle:tie', (event, data)=>{
       var message = "Tie! ";
       if(data.youCorrect){
         message += ' You: ' + data.youCorrect + '. ';
