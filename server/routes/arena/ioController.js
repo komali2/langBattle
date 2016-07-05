@@ -117,11 +117,19 @@ module.exports = {
             }
             //if this socket lost
             else if(user.numCorrect < user.partner.numCorrect){
-              socket.emit()
+              socket.emit('youLose',
+                {
+                  youCorrect: user.numCorrect,
+                  partnerCorrect: user.partner.numCorrect
+                });
+              socket.broadcast.to(battleRoom).emit('youWin',
+              {
+                youCorrect: user.numCorrect,
+                partnerCorrect: user.partner.numCorrect
+              });
             }
           }
         }
-
       }
       //if incorrect and in timetrial mode
       else if(user.mode === 'timeTrial'){

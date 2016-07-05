@@ -54,12 +54,24 @@ angular.module('langBattle')
     });
 
     $scope.$on('battle:youWin', (data)=>{
-      $scope.gameMessage = 'You Win!';
+      var message = "You Win";
+      if(data.youCorrect){
+        message += ' You: ' + data.youCorrect + '. ';
+        message += 'Your partner: ' + data.partnerCorrect + '.';
+      }
+
+      $scope.gameMessage = message;
       $scope.battleOngoing = false;
     });
 
     $scope.$on('battle:youLose', (data)=>{
-      $scope.gameMessage = 'You Lose.';
+      var message = "You Lose";
+      if(data.youCorrect){
+        message += ' You: ' + data.youCorrect + '. ';
+        message += 'Your partner: ' + data.partnerCorrect + '.';
+      }
+
+      $scope.gameMessage = message;
       $scope.battleOngoing = false;
 
     });
