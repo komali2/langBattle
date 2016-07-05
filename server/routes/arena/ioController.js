@@ -92,8 +92,8 @@ module.exports = {
 
   accuracyHandleSubmit: function(socket, data){
     var user = storage.userStorage[socket.id];
-    //if the user is in battle
-    if(user.inBattle){
+    //if the user is in battle and not already done
+    if(user.inBattle && !user.isFinished){
       //if card is correct
       if(user.cardArray[user.cardIndex -1].id === data.id){
         user.numCorrect++;
@@ -135,6 +135,13 @@ module.exports = {
             });
             //tell enemy it won, send stats
             socket.broadcast.to(battleRoom).emit('youWin', {
+              'youCorrect': user.numCorrect,
+              'partnerCorrect': user.partner.numCorrect
+            });
+          }
+          //if it was tied
+          else if(user.numCorrect === user.partner.numCorrect){
+            socket.emit('tie', {
               'youCorrect': user.numCorrect,
               'partnerCorrect': user.partner.numCorrect
             });

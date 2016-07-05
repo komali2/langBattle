@@ -76,6 +76,18 @@ angular.module('langBattle')
 
     });
 
+    $scope.$on('battle:tie', (dta)=>{
+      var message = "Tie! ";
+      if(data.youCorrect){
+        message += ' You: ' + data.youCorrect + '. ';
+        message += 'Your partner: ' + data.partnerCorrect + '.';
+      }
+
+      $scope.gameMessage = message;
+      $scope.battleOngoing = false;
+
+    })
+
     $scope.$on('battle:hasPartner', (data)=>{
       $scope.hasPartner = true;
       $scope.battleStatus = 'Press Start...';

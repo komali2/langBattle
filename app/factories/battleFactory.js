@@ -32,6 +32,10 @@ angular.module('langBattle')
       $rootScope.$broadcast('battle:youLose', data);
     });
 
+    socket.on('tie', (data)=>{
+      $rootScope.$broadcast('battle:tie', data);
+    })
+
     socket.on('hasPartner', (data)=>{
       $rootScope.$broadcast('battle:hasPartner', data);
     });
