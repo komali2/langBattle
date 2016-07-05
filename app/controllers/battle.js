@@ -39,7 +39,7 @@ angular.module('langBattle')
     });
 
     $scope.$on('battle:partnerStarted', (data)=>{
-      $scope.gameMessage = 'Your Partner is Ready!'
+      $scope.gameMessage = 'Your Partner is Waiting!'
     });
 
     $scope.$on('card:newCard', function(event, data){
